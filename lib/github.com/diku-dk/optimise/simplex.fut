@@ -1,9 +1,9 @@
 -- | Library for solving linear programming problems using the
 -- (revised) Simplex method.
-
--- | The result of applying `mk_simplex`@term, implementing both
--- Dantzig's original Simplex method and the revised method, which is
--- more efficient than the original method.
+--
+-- The result of applying `mk_simplex`@term is a module implementing
+-- both Dantzig's original Simplex method and the revised method,
+-- which is more efficient than the original method.
 --
 -- The implementations are based on the matrix formulation described
 -- in [1, Chapter 5].
@@ -14,7 +14,7 @@ local module type simplex = {
   -- | The scalar type.
   type t
 
-  -- | The status type.
+  -- | The result type.
   type result[n] = #Ok (t,[n]t) | #Unbounded
 
   -- | Returns the optimal solution to the objective function (a
