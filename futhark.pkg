@@ -1,0 +1,5 @@
+package github.com/diku-dk/optimise
+
+require {
+  github.com/diku-dk/linalg 0.4.4 #43ff98b27aea8e0bbfa7ba9ee2849d58c07b0a55
+}
