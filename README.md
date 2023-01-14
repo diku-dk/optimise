@@ -15,6 +15,18 @@ $ futhark pkg sync
 
 ## Usage (using `futhark repl`)
 
+A linear programming problem is in *standard form* if it is phrased as follows:
+
+$$ {\rm maximise}~\mathbf{c}^T x~
+   {\rm where}~\mathbf{A} \mathbf{x} \leq \mathbf{b}, ~\mathbf{x} \geq 0
+$$
+
+In the example below, we have
+
+- $\mathbf{A} = [[1,0],[0,2],[3,2]]$
+- $\mathbf{b} = [4,12,18]$
+- $\mathbf{c} = [3,5]$
+
 ```
 $ futhark repl
 [0]> import "lib/github.com/diku-dk/optimise/simplex"
