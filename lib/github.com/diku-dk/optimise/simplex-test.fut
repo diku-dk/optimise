@@ -35,9 +35,24 @@ module S = mk_simplex f64
 --         [31.0,11.0] }
 -- output { 14.648352 }
 
+-- test 5
+-- ==
+-- input { empty([0][0]f64) empty([0]f64) empty([0]f64) }
+-- output { 0.0 }
+
+-- test 6
+-- ==
+-- input { [[1.0]] [5.0] [2.0] }
+-- output { 10.0 }
+
+-- test 7
+-- ==
+-- input { [[-0.5, 0.0, 0.0], [-0.5, -1.0, -1.0], [0.0, -1.0, 0.0]] [0.0, 0.0, 0.0] [0.0, 1.5, -1.0] }
+-- output { f64.inf }
+
 local open S
 
 let main [m] [n] (A:[m][n]t) (b:[m]t) (c:[n]t) =
-  let x = match simplex A b c case #Ok p -> p.0 case #Unbounded -> -1
-  let y = match simplex_orig A b c case #Ok p -> p.0 case #Unbounded -> -1
+  let x = match simplex A b c case #Ok p -> p.0 case #Unbounded -> f64.inf
+  let y = match simplex_orig A b c case #Ok p -> p.0 case #Unbounded -> f64.inf
   in (x+y) / 2.0
