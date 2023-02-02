@@ -50,6 +50,11 @@ module S = mk_simplex f64
 -- input { [[-0.5, 0.0, 0.0], [-0.5, -1.0, -1.0], [0.0, -1.0, 0.0]] [0.0, 0.0, 0.0] [0.0, 1.5, -1.0] }
 -- output { f64.inf }
 
+-- test 8 (no improvement possible; will cycle if this is not detected)
+-- ==
+-- input { [[1.0]] [1.0] [0.0] }
+-- output { 0.0 }
+
 local open S
 
 let main [m] [n] (A:[m][n]t) (b:[m]t) (c:[n]t) =
