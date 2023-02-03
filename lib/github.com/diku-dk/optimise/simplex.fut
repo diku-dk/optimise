@@ -89,9 +89,9 @@ let entering [n][m] (A:[m][n]t) (Binv:[m][m]t) (cB:[m]t) (c:[n]t) (nbs:[n]var) :
   let cB_Binv : *[m]t = vecmatmul cB Binv
   let orig : [n]t = map2 (T.-) (vecmatmul cB_Binv A) c
   let slack : [m]t = cB_Binv
-  let res: [n](var, t) = map (\v -> if v.name < n
-		       then (v,orig[v.name])
-		       else (v,slack[v.name - n])
+  let res: [n](var, t) = map (\v ->
+               let c = if v.name < n then orig[v.name] else slack[v.name - n]
+               in if T.(c < zero) then (v, c) else (novar, zero)
 		) nbs
   in reduce (\x y -> if T.(x.1 < y.1) then x else y)
 	    (novar,zero) res
