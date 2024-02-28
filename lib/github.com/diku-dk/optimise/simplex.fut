@@ -41,7 +41,7 @@ local module type simplex = {
 import "../linalg/linalg"
 
 -- | Given some numeric module, produce a simplex module.
-module mk_simplex (T:field) : simplex with t = T.t = {
+module mk_simplex (T:ordered_field) : simplex with t = T.t = {
 
 module L = mk_linalg T
 
@@ -168,11 +168,10 @@ let simplexR [n][m] (A:[m][n]t) (b:[m]t) (c:[n]t) =
 		let a_rk' = a_k'[ri]
 		let Binv_r = Binv[ri]
 		let Binv' = tabulate_2d m m
-					T.(\i j -> if i == ri
-						   then Binv_r[j] / a_rk'
-						   else Binv[i,j] -
-							a_k'[i] * Binv_r[j] / a_rk'
-					  )
+					(\i j -> if i == ri
+						   then T.(Binv_r[j] / a_rk')
+						   else T.(Binv[i,j] -
+							   a_k'[i] * Binv_r[j] / a_rk'))
         let bs' = bs with [ri] = k
         let nbs' = nbs with [ki] = r
   		let xB' = matvecmul Binv' b
